@@ -6,6 +6,7 @@ import useDataFetching from "../../../common/hooks/useDataFetching";
 import PokemonCardSkeleton from "../PokemonCard/Skeleton";
 import PokemonCard from "../PokemonCard";
 import Toolbar from "./Toolbar";
+import Error from "../../Error";
 
 import * as Styled from "./PokemonsList.styled";
 
@@ -20,6 +21,8 @@ const PokemonsList: React.FC<PokemonsListProps> = ({
 }) => {
   const [filterType, setFilterType] = useState<string>("");
   const { data, loading, setOffset, error } = useDataFetching();
+
+  if (error) return <Error error={error} />;
 
   return (
     <Styled.Container>
