@@ -75,7 +75,8 @@ const Aside: React.FC<AsideProps> = ({ activePokemon }) => {
                     sx={{ width: "20%" }}
                   >
                     {/* 
-// @ts-ignore */}
+                      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+                      // @ts-ignore*/}
                     {typesString.join(", ")}
                   </Styled.TableCell>
                 </TableRow>

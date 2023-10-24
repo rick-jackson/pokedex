@@ -29,6 +29,7 @@ const useDataFetching = () => {
         setLoading(false);
       }
     })();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [offset]);
 
   return { data, setData, loading, error, setOffset };
