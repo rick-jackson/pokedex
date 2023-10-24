@@ -1,53 +1,60 @@
+import { useState } from "react";
 import { Button, CircularProgress } from "@mui/material";
 
-import type { Pokemon, PokemonItem } from "../../../entities/pokemon";
+import type { Pokemon } from "../../../entities/pokemon";
+import useDataFetching from "../../../common/hooks/useDataFetching";
 import PokemonCardSkeleton from "../PokemonCard/Skeleton";
 import PokemonCard from "../PokemonCard";
 import Toolbar from "./Toolbar";
+import Error from "../../Error";
 
 import * as Styled from "./PokemonsList.styled";
 
 type PokemonsListProps = {
   setActivePokemon: React.Dispatch<React.SetStateAction<Pokemon | null>>;
-  pokemonsData: Array<Partial<Pokemon> & Partial<PokemonItem>>;
-  loading: boolean;
   activePokemon: Pokemon | null;
-  setOffset: React.Dispatch<React.SetStateAction<number>>;
-  setType: React.Dispatch<React.SetStateAction<string | undefined>>;
 };
 
 const PokemonsList: React.FC<PokemonsListProps> = ({
   setActivePokemon,
-  pokemonsData,
-  loading,
   activePokemon,
-  setOffset,
-  setType,
 }) => {
+  const [filterType, setFilterType] = useState<string>("");
+  const { data, loading, setOffset, error } = useDataFetching();
+
+  if (error) return <Error error={error} />;
+
   return (
     <Styled.Container>
-      <Toolbar loading={loading} setType={setType} setOffset={setOffset} />
+      <Toolbar loading={loading} setFilterType={setFilterType} />
       <Styled.PokemonsList>
-        {pokemonsData.map((pokemon) => {
-          if (loading && !pokemon?.id)
-            return <PokemonCardSkeleton key={pokemon.url} />;
-          return (
-            <PokemonCard
-              data={pokemon as Pokemon}
-              setActivePokemon={setActivePokemon}
-              activePokemon={activePokemon}
-              key={pokemon.id}
-            />
-          );
-        })}
+        {data
+          .filter((pokemon) => {
+            if (!pokemon?.id || !filterType) return pokemon;
+            return pokemon.types
+              ?.map(({ type }) => type.name)
+              .includes(filterType);
+          })
+          .map((pokemon) => {
+            if (loading && !pokemon?.id)
+              return <PokemonCardSkeleton key={pokemon.url} />;
+            return (
+              <PokemonCard
+                data={pokemon as Pokemon}
+                setActivePokemon={setActivePokemon}
+                activePokemon={activePokemon}
+                key={pokemon.id}
+              />
+            );
+          })}
       </Styled.PokemonsList>
-      {!!pokemonsData.length && (
+      {!!data.length && !filterType && (
         <Button
           color="primary"
           variant="contained"
           size="large"
           sx={{ width: "100%" }}
-          onClick={() => setOffset(pokemonsData.length)}
+          onClick={() => setOffset(data.length)}
         >
           {loading ? (
             <CircularProgress size={26} color="inherit" />

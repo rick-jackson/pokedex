@@ -6,17 +6,16 @@ import * as Styled from "./Toolbar.styled";
 
 type ToolbarProps = {
   loading: boolean;
-  setOffset: React.Dispatch<React.SetStateAction<number>>;
-  setType: React.Dispatch<React.SetStateAction<string | undefined>>;
+  setFilterType: React.Dispatch<React.SetStateAction<string>>;
 };
 
-const Toolbar: React.FC<ToolbarProps> = ({ loading, setType, setOffset }) => {
+const Toolbar: React.FC<ToolbarProps> = ({ loading, setFilterType }) => {
   return (
     <Styled.Toolbar>
       <Styled.Title variant="h2">Pokedex</Styled.Title>
       <Styled.Filters>
         {loading && <CircularProgress size={25} color="primary" />}
-        <Autocomplete setType={setType} setOffset={setOffset} />
+        <Autocomplete setFilterType={setFilterType} />
       </Styled.Filters>
     </Styled.Toolbar>
   );

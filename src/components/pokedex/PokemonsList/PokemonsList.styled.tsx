@@ -24,7 +24,6 @@ export const PokemonsList = styled.div`
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 12px;
-  margin: auto;
   width: 100%;
 
   ${theme.breakpoints.down("lg")} {
