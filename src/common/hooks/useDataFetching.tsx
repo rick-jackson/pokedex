@@ -18,7 +18,7 @@ const useDataFetching = (offset = 0, typeUrl: string | undefined) => {
     (async () => {
       try {
         setLoading(true);
-        const pokemons = !!typeUrl
+        const pokemons = typeUrl
           ? await getPokemonsByType(typeUrl)
           : await getPokemonsByParams(offset);
 
