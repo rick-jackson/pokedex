@@ -1,38 +1,7 @@
 {
-  "plugins": [
-    "prettier"
-  ],
-  "extends": [
-    "next/core-web-vitals",
-    "plugin:@typescript-eslint/recommended",
-    "prettier"
-  ],
-  "parser": "@typescript-eslint/parser",
-  "env": {
-    "browser": true,
-    "es2022": true,
-    "node": true
-  },
-  "parserOptions": {
-    "sourceType": "module",
-    "ecmaFeatures": {
-      "jsx": true
-    },
-    "project": [
-      "./tsconfig.json"
+    "extends": [
+        "eslint:recommended",
+        "plugin:@typescript-eslint/recommended",
+        "react-app"
     ]
-  },
-  "rules": {
-    "prettier/prettier": [
-      "warn",
-      {
-        "endOfLine": "auto"
-      }
-    ]
-  },
-  "settings": {
-    "react": {
-      "version": "detect"
-    }
-  }
 }
