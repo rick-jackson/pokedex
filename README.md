@@ -17,16 +17,19 @@ Pokedex - це тестове завдання для компанії Teamvoy. 
    ```bash
    git clone https://github.com/rick-jackson/pokedex.git
 2. Перейдіть в папку проекту:
+   ```bash
    cd pokedex
 3. Встановіть необхідні залежності:
+   ```bash
    npm install
 4. Запустіть проект на локальному сервері:
+   ```bash
    npm start
    
-Використані технології:
-React - JavaScript бібліотека для побудови інтерфейсів.
-Axios - Бібліотека для здійснення HTTP-запитів.
-Styled Components - Бібліотека для створення стилів в React-компонентах.
-Material-UI - Компонентна бібліотека для React з готовими UI-елементами.
-Emotion - CSS-ін-JS бібліотека для React.
-TypeScript - Система типізації для JavaScript.
+## Використані технології:
+- [React](https://reactjs.org/)
+- [Axios](https://axios-http.com/)
+- [Styled Components](https://styled-components.com/)
+- [Material-UI](https://mui.com/)
+- [Emotion](https://emotion.sh/)
+- [TypeScript](https://www.typescriptlang.org/)
