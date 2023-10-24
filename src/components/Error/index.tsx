@@ -1,5 +1,5 @@
-import { Box, Typography } from "@mui/material";
 import type { AxiosError } from "axios";
+import { Box, Typography } from "@mui/material";
 
 type ErrorProps = {
   error: AxiosError;

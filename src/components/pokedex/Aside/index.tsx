@@ -22,9 +22,9 @@ type AsideProps = {
 };
 
 const Aside: React.FC<AsideProps> = ({ activePokemon }) => {
-  const typesString = activePokemon?.types.map(({ type }) =>
-    capitalizeFirstLetter(type.name)
-  );
+  const typesString = activePokemon?.types
+    .map(({ type }) => capitalizeFirstLetter(type.name))
+    .join(", ");
 
   const matches = useMediaQuery(theme.breakpoints.down("sm"));
 
@@ -74,10 +74,7 @@ const Aside: React.FC<AsideProps> = ({ activePokemon }) => {
                     component="th"
                     sx={{ width: "20%" }}
                   >
-                    {/* 
-                      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-                      // @ts-ignore*/}
-                    {typesString.join(", ")}
+                    {typesString}
                   </Styled.TableCell>
                 </TableRow>
                 {activePokemon.stats.map(({ stat: { name }, base_stat }) => (

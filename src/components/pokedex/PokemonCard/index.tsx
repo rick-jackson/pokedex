@@ -7,11 +7,11 @@ import {
   Card,
 } from "@mui/material";
 
+import type { Pokemon } from "../../../entities/pokemon";
 import { capitalizeFirstLetter } from "../../../common/utils/getLabelText";
 import { TYPE_LABELS_COLORS } from "../../../common/data/labelsColors";
 
 import * as Styled from "./PokemonCard.styled";
-import { Pokemon } from "../../../entities/pokemon";
 
 type PokemonCardProps = {
   data: Pokemon;
