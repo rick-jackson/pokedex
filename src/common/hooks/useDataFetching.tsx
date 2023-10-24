@@ -2,31 +2,26 @@ import { useState, useEffect } from "react";
 
 import type { AxiosError } from "axios";
 import type { Pokemon, PokemonItem } from "../../entities/pokemon";
-import { getPokemonsByType } from "../../gateways/getPokemonsByType";
 import { getPokemonsByParams } from "../../gateways/getPokemonsByParams";
 import { getPokemonsDataByUrl } from "../../gateways/getPokemonsDataByUrl";
 
-const useDataFetching = (offset = 0, typeUrl: string | undefined) => {
+const useDataFetching = () => {
   const [data, setData] = useState<
     Array<Partial<Pokemon> & Partial<PokemonItem>>
   >([]);
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState<boolean>(false);
+  const [offset, setOffset] = useState<number>(0);
   const [error, setError] = useState<AxiosError | null>(null);
-  const isResetTypeUrl = !!typeUrl || typeUrl === undefined;
 
   useEffect(() => {
     (async () => {
       try {
         setLoading(true);
-        const pokemons = !!typeUrl
-          ? await getPokemonsByType(typeUrl)
-          : await getPokemonsByParams(offset);
+        const pokemonsList = await getPokemonsByParams(offset);
+        setData([...data, ...pokemonsList]);
 
-        setData(isResetTypeUrl ? pokemons : [...data, ...pokemons]);
-
-        const pokemonsData = await getPokemonsDataByUrl(pokemons);
-
-        setData(isResetTypeUrl ? pokemonsData : [...data, ...pokemonsData]);
+        const pokemonsData = await getPokemonsDataByUrl(pokemonsList);
+        setData([...data, ...pokemonsData]);
 
         setLoading(false);
       } catch (error) {
@@ -34,11 +29,9 @@ const useDataFetching = (offset = 0, typeUrl: string | undefined) => {
         setLoading(false);
       }
     })();
+  }, [offset]);
 
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [offset, typeUrl]);
-
-  return { data, setData, loading, error };
+  return { data, setData, loading, error, setOffset };
 };
 
 export default useDataFetching;

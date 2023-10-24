@@ -10,11 +10,10 @@ import useAutoComplete from "../../../common/hooks/useAutocomplete";
 import { theme } from "../../../theme";
 
 type AutocompleteProps = {
-  setOffset: React.Dispatch<React.SetStateAction<number>>;
-  setType: React.Dispatch<React.SetStateAction<string | undefined>>;
+  setFilterType: React.Dispatch<React.SetStateAction<string>>;
 };
 
-const Autocomplete: React.FC<AutocompleteProps> = ({ setType, setOffset }) => {
+const Autocomplete: React.FC<AutocompleteProps> = ({ setFilterType }) => {
   const matches = useMediaQuery(theme.breakpoints.down("md"));
 
   const { open, setOpen, options, loading } = useAutoComplete();
@@ -35,8 +34,11 @@ const Autocomplete: React.FC<AutocompleteProps> = ({ setType, setOffset }) => {
       options={options}
       loading={loading}
       onChange={(_, data) => {
-        setType(data?.name);
-        setOffset(0);
+        if (data) {
+          setFilterType(data.name);
+        } else {
+          setFilterType("");
+        }
       }}
       renderInput={(params) => (
         <TextField
