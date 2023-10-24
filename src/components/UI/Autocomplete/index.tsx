@@ -1,3 +1,4 @@
+import React from "react";
 import {
   TextField,
   useMediaQuery,
@@ -20,6 +21,12 @@ const Autocomplete: React.FC<AutocompleteProps> = ({ setFilterType }) => {
 
   return (
     <MuiAutocomplete
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      //@ts-ignore
+      inputProps={{
+        readOnly: true,
+        style: { cursor: "pointer" },
+      }}
       sx={{ minWidth: matches ? 200 : 300 }}
       size="small"
       open={open}
@@ -45,9 +52,9 @@ const Autocomplete: React.FC<AutocompleteProps> = ({ setFilterType }) => {
           {...params}
           label="Type"
           InputProps={{
+            ...params.InputProps,
             disabled: true,
             readOnly: true,
-            ...params.InputProps,
             endAdornment: (
               <>
                 {loading ? (
