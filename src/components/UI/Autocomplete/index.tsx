@@ -46,6 +46,7 @@ const Autocomplete: React.FC<AutocompleteProps> = ({ setFilterType }) => {
           label="Type"
           InputProps={{
             disabled: true,
+            readOnly: true,
             ...params.InputProps,
             endAdornment: (
               <>
