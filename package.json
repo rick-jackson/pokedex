@@ -15,7 +15,6 @@
     "@types/react": "^18.2.31",
     "@types/react-dom": "^18.2.14",
     "axios": "^1.5.1",
-    "eslint": "^8.52.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-scripts": "5.0.1",
@@ -48,6 +47,7 @@
     ]
   },
   "devDependencies": {
-    "@babel/plugin-proposal-private-property-in-object": "^7.21.11"
+    "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
+    "eslint": "^8.52.0"
   }
 }
