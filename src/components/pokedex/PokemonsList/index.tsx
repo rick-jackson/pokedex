@@ -29,19 +29,16 @@ const PokemonsList: React.FC<PokemonsListProps> = ({
       <Toolbar loading={loading} setType={setType} setOffset={setOffset} />
       <Styled.PokemonsList>
         {pokemonsData.map((pokemon) => {
-          if (loading && pokemon.url)
+          if (loading && !pokemon?.id)
             return <PokemonCardSkeleton key={pokemon.url} />;
-
-          if (pokemon.id) {
-            return (
-              <PokemonCard
-                data={pokemon as Pokemon}
-                setActivePokemon={setActivePokemon}
-                activePokemon={activePokemon}
-                key={pokemon.id}
-              />
-            );
-          }
+          return (
+            <PokemonCard
+              data={pokemon as Pokemon}
+              setActivePokemon={setActivePokemon}
+              activePokemon={activePokemon}
+              key={pokemon.id}
+            />
+          );
         })}
       </Styled.PokemonsList>
       {!!pokemonsData.length && (
