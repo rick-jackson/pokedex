@@ -4,7 +4,7 @@ import type { PokemonItem } from "../entities/pokemon";
 export const getPokemonsByParams = async (
   offset: number
 ): Promise<PokemonItem[]> => {
-  const { data } = await axios.get("https://pokeapi.co/api/v2/pokemon", {
+  const { data } = await axios.get(`${process.env.REACT_APP_API}/pokemon`, {
     params: { limit: 24, offset },
   });
 
