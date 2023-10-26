@@ -24,11 +24,7 @@ const PokemonCard: React.FC<PokemonCardProps> = ({
   activePokemon,
   setActivePokemon,
 }) => {
-  const {
-    name,
-    sprites: { other },
-    types,
-  } = data;
+  const { name, sprites, types } = data;
 
   const handleClick = () => {
     setActivePokemon(activePokemon?.id === data.id ? null : data);
@@ -44,7 +40,7 @@ const PokemonCard: React.FC<PokemonCardProps> = ({
         <CardMedia
           component="img"
           height="140"
-          image={other["official-artwork"]["front_default"]}
+          image={sprites?.other["official-artwork"].front_default}
           alt={name}
           sx={{ objectFit: "contain" }}
         />
