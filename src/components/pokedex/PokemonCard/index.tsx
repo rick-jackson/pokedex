@@ -15,26 +15,27 @@ import * as Styled from "./PokemonCard.styled";
 
 type PokemonCardProps = {
   data: Pokemon;
-  activePokemon: Pokemon | null;
+  activePokemonId?: Pokemon["id"];
   setActivePokemon: React.Dispatch<React.SetStateAction<Pokemon | null>>;
 };
 
 const PokemonCard: React.FC<PokemonCardProps> = ({
   data,
-  activePokemon,
+  activePokemonId,
   setActivePokemon,
 }) => {
-  const { name, sprites, types } = data;
+  const { name, sprites, types, id } = data;
+  const isActivePokemon = activePokemonId === id;
 
   const handleClick = () => {
-    setActivePokemon(activePokemon?.id === data.id ? null : data);
+    setActivePokemon(isActivePokemon ? null : data);
   };
 
   return (
     <Card
       sx={{ maxHeight: "236px" }}
       onClick={handleClick}
-      raised={activePokemon?.id === data.id}
+      raised={isActivePokemon}
     >
       <CardActionArea>
         <CardMedia

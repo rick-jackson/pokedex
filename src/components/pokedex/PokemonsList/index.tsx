@@ -36,7 +36,7 @@ const PokemonsList: React.FC<PokemonsListProps> = ({
         <PokemonCard
           data={pokemon as Pokemon}
           setActivePokemon={setActivePokemon}
-          activePokemon={activePokemon}
+          activePokemonId={activePokemon?.id}
           key={pokemon.id}
         />
       );
