@@ -57,7 +57,7 @@ const PokemonsList: React.FC<PokemonsListProps> = ({
           variant="contained"
           size="large"
           sx={{ width: "100%", marginTop: "auto" }}
-          onClick={() => setOffset(data.length)}
+          {...(!loading && { onClick: () => setOffset(data.length) })}
         >
           {loading ? (
             <CircularProgress size={26} color="inherit" />

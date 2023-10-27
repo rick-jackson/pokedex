@@ -1,10 +1,12 @@
 import { useState, useEffect } from "react";
 import { getPokemonsType } from "../../gateways/getPokemonsType";
 import type { PokemonItem } from "../../entities/pokemon";
+import { AxiosError } from "axios";
 
 const useAutoComplete = () => {
   const [open, setOpen] = useState(false);
   const [options, setOptions] = useState<PokemonItem[]>([]);
+  const [error, setError] = useState<AxiosError | null>(null);
   const loading = open && options.length === 0;
 
   useEffect(() => {
@@ -15,10 +17,16 @@ const useAutoComplete = () => {
     }
 
     (async () => {
-      const pokemonsType = await getPokemonsType();
+      try {
+        setError(null);
+        const pokemonsType = await getPokemonsType();
 
-      if (active) {
-        setOptions(pokemonsType);
+        if (active) {
+          setOptions(pokemonsType);
+        }
+      } catch (e) {
+        setError(e as AxiosError);
+        return;
       }
     })();
 
@@ -33,7 +41,7 @@ const useAutoComplete = () => {
     }
   }, [open]);
 
-  return { open, setOpen, options, loading };
+  return { open, setOpen, options, loading, error };
 };
 
 export default useAutoComplete;

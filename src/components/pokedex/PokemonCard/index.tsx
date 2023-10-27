@@ -50,7 +50,7 @@ const PokemonCard: React.FC<PokemonCardProps> = ({
             {capitalizeFirstLetter(name)}
           </Styled.PokemonName>
           <Box sx={{ display: "flex", gap: "8px" }}>
-            {types.map(({ type: { name } }) => (
+            {types?.map(({ type: { name } }) => (
               <Chip
                 sx={{
                   minWidth: "70px",
