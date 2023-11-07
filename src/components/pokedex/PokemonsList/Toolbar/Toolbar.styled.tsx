@@ -9,10 +9,15 @@ export const Toolbar = styled.div`
 `;
 
 export const Title = styled(Typography)`
-  text-align: center;
+  display: flex;
+  align-items: center;
 
   ${theme.breakpoints.down("md")} {
     font-size: 1.75rem !important;
+    img {
+      width: 50px;
+      height: 50px;
+    }
   }
 `;
 
